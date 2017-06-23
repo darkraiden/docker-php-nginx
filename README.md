@@ -9,7 +9,7 @@ How to use this image
 ## Create a Dockerfile
 
 ```
-FROM crowdcube/php-nginx:latest
+FROM davidedimauro88/php-nginx:latest
 
 COPY ./ /your/document/root
 COPY ./nginx.conf /etc/nginx/conf.d/nginx.conf
@@ -47,5 +47,5 @@ The most important part of the Nginx configuration is the `location /index.php` 
 If you don't want to include a Dockerfile in your project, it is sufficient to do the following:
 
 ```
-$ docker run -d -p 8080:80 --name my-php-app -v "$PWD":/your/document/root crowdcube/php-nginx:latest
+$ docker run -d -p 8080:80 --name my-php-app -v "$PWD":/your/document/root davidedimauro88/php-nginx:latest
 ```
