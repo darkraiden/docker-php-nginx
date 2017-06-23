@@ -29,7 +29,7 @@ server {
       try_files $uri $uri/ /index.php?$query_string;
   }
 
-  location /index.php {
+  location ~ \.php$ {
       include fastcgi_params;
       fastcgi_connect_timeout 10s;
       fastcgi_read_timeout 10s;
