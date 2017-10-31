@@ -1,0 +1,29 @@
+server {
+    listen ${NGINX_PORT};
+    root ${NGINX_DOCUMENT_ROOT};
+    index index.php;
+
+    port_in_redirect off;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~* \.(jpg|jpeg|gif|png|ico|css|js)$ {
+        access_log  off;
+        log_not_found off;
+        expires 1w;
+    }
+
+    location ~ \.php$ {
+        fastcgi_connect_timeout 10s;
+        fastcgi_read_timeout 10s;
+        fastcgi_buffers 256 4k;
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        include fastcgi_params;
+    }
+}
